@@ -1,7 +1,3 @@
-function getRandomHexColor() {
-	return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
-
 const elemRefs = {
 	createBtn: document.querySelector('[data-create]'),
 	destroyBtn: document.querySelector('[data-destroy]'),
@@ -14,6 +10,7 @@ let amount = Number('');
 elemRefs.numberOfBoxes.addEventListener('input', onInputGetQuantaty);
 elemRefs.createBtn.addEventListener('click', onCreateBtnClick);
 elemRefs.destroyBtn.addEventListener('click', onDestroyBtnClick);
+window.addEventListener('keypress', onEnterKeypress);
 
 function onInputGetQuantaty(event) {
 	amount = event.currentTarget.value;
@@ -21,6 +18,10 @@ function onInputGetQuantaty(event) {
 
 function onCreateBtnClick() {
 	createBoxes(amount);
+}
+
+function onEnterKeypress(event) {
+	if (event.code.toLowerCase() === 'enter') createBoxes(amount);
 }
 
 function onDestroyBtnClick() {
@@ -41,7 +42,7 @@ function createBoxes(amount) {
 	let boxSize = 30;
 
 	if (validateRange(amount)) {
-		alert('Неправильное число. Пожалуйста, введите число от 1 до 100');
+		alert('Пожалуйста, введите число от 1 до 100');
 		elemRefs.numberOfBoxes.value = '';
 		return;
 	}
@@ -61,4 +62,8 @@ function destroyBoxes() {
 	elemRefs.parentBox.innerHTML = '';
 	elemRefs.numberOfBoxes.value = '';
 	amount = 0;
+}
+
+function getRandomHexColor() {
+	return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
