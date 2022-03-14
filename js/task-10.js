@@ -2,28 +2,47 @@ function getRandomHexColor() {
 	return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-const createBoxesBtnRef = document.querySelector('[data-create]');
-const destroyBoxesBtnRef = document.querySelector('[data-destroy]');
-const numberOfBoxesToCreate = document.querySelector('input[type="number"]');
-const parentBox = document.querySelector('#boxes');
-let amount = Number('');
-
-//проверяет, чтобы введенное число было в нужном диапазоне диапазоне
-const validateEnteredQuantatyOfBoxes = (quantaty) => {
-	const min = Number(numberOfBoxesToCreate.min);
-	const max = Number(numberOfBoxesToCreate.max);
-
-	return quantaty < min || quantaty > max;
+const elemRefs = {
+	createBtn: document.querySelector('[data-create]'),
+	destroyBtn: document.querySelector('[data-destroy]'),
+	numberOfBoxes: document.querySelector('input[type="number"]'),
+	parentBox: document.querySelector('#boxes'),
 };
 
+let amount = Number('');
+
+elemRefs.numberOfBoxes.addEventListener('input', onInputGetQuantaty);
+elemRefs.createBtn.addEventListener('click', onCreateBtnClick);
+elemRefs.destroyBtn.addEventListener('click', onDestroyBtnClick);
+
+function onInputGetQuantaty(event) {
+	amount = event.currentTarget.value;
+}
+
+function onCreateBtnClick() {
+	createBoxes(amount);
+}
+
+function onDestroyBtnClick() {
+	destroyBoxes();
+}
+
+// проеряет правильность введенного числа
+function validateRange(quantaty) {
+	const min = Number(elemRefs.numberOfBoxes.min);
+	const max = Number(elemRefs.numberOfBoxes.max);
+
+	return quantaty < min || quantaty > max;
+}
+
 //создает нужное количество div
-const createBoxes = (amount) => {
+function createBoxes(amount) {
 	const markup = [];
 	let boxSize = 30;
 
-	if (validateEnteredQuantatyOfBoxes(amount)) {
+	if (validateRange(amount)) {
 		alert('Неправильное число. Пожалуйста, введите число от 1 до 100');
-		numberOfBoxesToCreate.value = '';
+		elemRefs.numberOfBoxes.value = '';
 		return;
 	}
 
@@ -34,25 +53,12 @@ const createBoxes = (amount) => {
 		boxSize += 10;
 	}
 
-	parentBox.insertAdjacentHTML('afterbegin', markup.join``);
-};
+	elemRefs.parentBox.insertAdjacentHTML('afterbegin', markup.join``);
+}
 
 // удаляет разметку
-const destroyBoxes = () => {
-	parentBox.innerHTML = '';
-	numberOfBoxesToCreate.value = '';
+function destroyBoxes() {
+	elemRefs.parentBox.innerHTML = '';
+	elemRefs.numberOfBoxes.value = '';
 	amount = 0;
-};
-
-// получает число введеное пользователем в поле input
-numberOfBoxesToCreate.addEventListener('change', (e) => {
-	amount = numberOfBoxesToCreate.value;
-});
-
-// обрабатывает событие "клик" на кнопке Create и создает нужное количество div
-createBoxesBtnRef.addEventListener('click', () => {
-	createBoxes(amount);
-});
-
-// обрабатывает событие "клик" на кнопке Destroy и удаляет все div
-destroyBoxesBtnRef.addEventListener('click', destroyBoxes);
+}
