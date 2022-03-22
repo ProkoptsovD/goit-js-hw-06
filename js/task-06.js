@@ -1,11 +1,20 @@
-const enteredData = document.getElementById('validation-input');
+const inputValidationElem = document.querySelector('#validation-input');
 
-const checkEnteredData = () => {
-	const { value, dataset } = enteredData;
+inputValidationElem.addEventListener('blur', checkEnteredData);
 
-	value.length == dataset.length
-		? enteredData.classList.add('valid')
-		: enteredData.classList.add('invalid');
-};
+function checkEnteredData(e) {
+	const {
+		value: { length: enteredValue },
+		dataset: { length: requeredValue },
+	} = e.currentTarget;
+	const isDataValid = enteredValue == requeredValue;
 
-enteredData.addEventListener('blur', checkEnteredData);
+	isDataValid ? addClass('valid') : addClass('invalid');
+}
+
+function addClass(className) {
+	const input = document.querySelector('#validation-input');
+
+	input.className = '';
+	input.classList.add(className);
+}
