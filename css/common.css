@@ -23,6 +23,7 @@ button {
 	cursor: pointer;
 }
 
+
 /* стили для task-03 */
 .gallery {
 	display: flex;
@@ -66,3 +67,77 @@ button {
 }
 
 /* конец стилей для task-03 */
+
+/* стили для task-04*/
+#counter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	display: flex;
+
+	transform: translate(-50%, -50%);
+}
+
+#value {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 200px;
+	height: 200px;
+
+	font-size: 7.5rem;
+	font-weight: 700;
+
+	color: #ffffff;
+	background-color: limegreen;
+}
+
+button {
+	width: 200px;
+	height: 200px;
+
+	font-size: 3rem;
+	font-weight: 700;
+	border: none;
+
+	color: antiquewhite;
+	background-color: firebrick;
+}
+
+button:hover {
+	filter: brightness(170%);
+}
+
+button:nth-of-type(1) {
+	border-top-left-radius: 1.5rem;
+	border-bottom-left-radius: 1.5rem;
+}
+button:nth-of-type(2) {
+	border-top-right-radius: 1.5rem;
+	border-bottom-right-radius: 1.5rem;
+}
+
+.reset {
+	position: absolute;
+	bottom: 25%;
+	left: 50%;
+
+	width: 200px;
+	height: 50px;
+
+	font-size: 1rem;
+
+	border-top-right-radius: 1.5rem;
+	border-bottom-right-radius: 1.5rem;
+	border-top-left-radius: 1.5rem;
+	border-bottom-left-radius: 1.5rem;
+
+	background-color: grey;
+	transform: translateX(-50%);
+}
+
+button.reset:hover {
+	filter: brightness(120%);
+}
