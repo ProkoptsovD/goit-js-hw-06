@@ -23,7 +23,6 @@ button {
 	cursor: pointer;
 }
 
-
 /* стили для task-03 */
 .gallery {
 	display: flex;
@@ -94,7 +93,8 @@ button {
 	background-color: limegreen;
 }
 
-button {
+#counter button,
+.reset {
 	width: 200px;
 	height: 200px;
 
@@ -106,15 +106,15 @@ button {
 	background-color: firebrick;
 }
 
-button:hover {
+#counter button:hover {
 	filter: brightness(170%);
 }
 
-button:nth-of-type(1) {
+#counter button:nth-of-type(1) {
 	border-top-left-radius: 1.5rem;
 	border-bottom-left-radius: 1.5rem;
 }
-button:nth-of-type(2) {
+#counter button:nth-of-type(2) {
 	border-top-right-radius: 1.5rem;
 	border-bottom-right-radius: 1.5rem;
 }
@@ -138,6 +138,6 @@ button:nth-of-type(2) {
 	transform: translateX(-50%);
 }
 
-button.reset:hover {
+.reset:hover {
 	filter: brightness(120%);
 }

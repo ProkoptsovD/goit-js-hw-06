@@ -3,11 +3,11 @@ const btnDecrement = document.querySelector('button[data-action="decrement"]');
 const btnIncrement = document.querySelector('button[data-action="increment"]');
 const counter = document.querySelector('#counter');
 
-const button = document.createElement('button');
+const resetBtn = document.createElement('button');
 
-button.textContent = 'reset the counter';
-button.classList.add('reset');
-counter.insertAdjacentElement('afterend', button);
+resetBtn.textContent = 'reset the counter';
+resetBtn.classList.add('reset');
+counter.insertAdjacentElement('afterend', resetBtn);
 
 const btnReset = document.querySelector('.reset');
 
