@@ -1,6 +1,6 @@
 const loginFormRef = document.querySelector('.login-form');
 
-const handleEnteredData = (event) => {
+const onFormSubmit = (event) => {
 	event.preventDefault();
 
 	const {
@@ -14,4 +14,4 @@ const handleEnteredData = (event) => {
 	loginFormRef.reset();
 };
 
-loginFormRef.addEventListener('submit', handleEnteredData);
+loginFormRef.addEventListener('submit', onFormSubmit);
