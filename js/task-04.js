@@ -1,9 +1,10 @@
-const counterValueOnPage = document.getElementById('value');
+const counterValueOnPage = document.querySelector('#value');
 const btnDecrement = document.querySelector('button[data-action="decrement"]');
 const btnIncrement = document.querySelector('button[data-action="increment"]');
-const counter = document.getElementById('counter');
+const counter = document.querySelector('#counter');
 
 const button = document.createElement('button');
+
 button.textContent = 'reset the counter';
 button.classList.add('reset');
 counter.insertAdjacentElement('afterend', button);
