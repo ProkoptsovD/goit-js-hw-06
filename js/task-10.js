@@ -7,18 +7,23 @@ const elemRefs = {
 
 let amount = Number('');
 
+// чтобы вывести сообщение о действии пользователя, типа фича такая
+const paragraph = document.createElement('p');
+
 elemRefs.numberOfBoxes.addEventListener('input', onInputGetQuantaty);
 elemRefs.createBtn.addEventListener('click', onCreateBtnClick);
 elemRefs.destroyBtn.addEventListener('click', onDestroyBtnClick);
 
 window.addEventListener('keypress', onEnterKeypress);
 
-function onInputGetQuantaty(event) {
-	amount = event.currentTarget.value;
-}
-
 function onCreateBtnClick() {
+	if (!validateRange(amount)) {
+		destroyBoxes();
+	}
+
 	createBoxes(amount);
+	alertMessage('create');
+	resetValues();
 }
 
 function onEnterKeypress(event) {
@@ -27,11 +32,24 @@ function onEnterKeypress(event) {
 
 	if (!isEnterKeyPressed) return;
 
+	if (!validateRange(amount)) {
+		destroyBoxes();
+	}
+
 	createBoxes(amount);
+	alertMessage('create');
+	resetValues();
 }
 
 function onDestroyBtnClick() {
 	destroyBoxes();
+	alertMessage('destroy');
+	resetValues();
+}
+
+// получает знаечние введенное пользователем
+function onInputGetQuantaty(event) {
+	amount = event.currentTarget.value;
 }
 
 // проеряет правильность введенного числа
@@ -61,16 +79,36 @@ function createBoxes(amount) {
 	}
 
 	elemRefs.parentBox.insertAdjacentHTML('afterbegin', markup.join``);
-	elemRefs.numberOfBoxes.value = '';
 }
 
 // удаляет разметку
 function destroyBoxes() {
 	elemRefs.parentBox.innerHTML = '';
-	elemRefs.numberOfBoxes.value = '';
-	amount = 0;
 }
 
+// создает рандомный цвет
 function getRandomHexColor() {
 	return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
+
+// выводит сообщение о действии пользователя
+function alertMessage(typeOfOperation) {
+	let message = '';
+
+	if (typeOfOperation === 'create')
+		message = !validateRange(amount)
+			? `You have created ${amount} box` + `${amount == 1 ? '' : 'es'}`
+			: `Sorry, but you should enter a valid number of boxes first`;
+	if (typeOfOperation === 'destroy')
+		message = 'You have destroyed all the boxes';
+
+	paragraph.classList.add('message');
+	paragraph.textContent = message;
+	elemRefs.parentBox.prepend(paragraph);
+}
+
+// приводит к дефолтному значению
+function resetValues() {
+	elemRefs.numberOfBoxes.value = '';
+	amount = 0;
 }
