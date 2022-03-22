@@ -38,8 +38,8 @@ const logResults = function () {
 		arr.push(categoryNames[i], amountOfElemsInCategory[i]);
 	}
 
-	return arr.join`\n`;
+	console.log(arr.join`\n`);
 };
 
 getNumberOfCategories();
-console.log(logResults());
+logResults();
