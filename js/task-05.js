@@ -1,10 +1,13 @@
-const input = document.getElementById('name-input');
-const output = document.getElementById('name-output');
+const inputElem = document.querySelector('#name-input');
+const outputElem = document.querySelector('#name-output');
 
-const handleInput = () => {
-	const { value } = input;
+const onInputTyping = () => {
+	const DEFAULT_NAME = 'Anonymous';
+	const { value } = inputElem;
 
-	value ? (output.textContent = value) : (output.textContent = 'Anonymous');
+	value
+		? (outputElem.textContent = value)
+		: (outputElem.textContent = DEFAULT_NAME);
 };
 
-input.addEventListener('input', handleInput);
+inputElem.addEventListener('input', onInputTyping);
