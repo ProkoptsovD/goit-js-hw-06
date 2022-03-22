@@ -10,6 +10,7 @@ let amount = Number('');
 elemRefs.numberOfBoxes.addEventListener('input', onInputGetQuantaty);
 elemRefs.createBtn.addEventListener('click', onCreateBtnClick);
 elemRefs.destroyBtn.addEventListener('click', onDestroyBtnClick);
+
 window.addEventListener('keypress', onEnterKeypress);
 
 function onInputGetQuantaty(event) {
@@ -21,7 +22,12 @@ function onCreateBtnClick() {
 }
 
 function onEnterKeypress(event) {
-	if (event.code.toLowerCase() === 'enter') createBoxes(amount);
+	const ENTER_CODE_KEY = 'Enter';
+	const isEnterKeyPressed = event.code === ENTER_CODE_KEY;
+
+	if (!isEnterKeyPressed) return;
+
+	createBoxes(amount);
 }
 
 function onDestroyBtnClick() {
@@ -55,6 +61,7 @@ function createBoxes(amount) {
 	}
 
 	elemRefs.parentBox.insertAdjacentHTML('afterbegin', markup.join``);
+	elemRefs.numberOfBoxes.value = '';
 }
 
 // удаляет разметку
