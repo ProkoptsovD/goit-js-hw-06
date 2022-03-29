@@ -7,9 +7,10 @@ refs.inputValidationElem.addEventListener('blur', checkEnteredData);
 function checkEnteredData(e) {
 	const { value: passedData, dataset: requeredData } = e.currentTarget;
 	const isDataValid = Number(passedData.length) === Number(requeredData.length);
+	const isInputEmpty = passedData === '';
 
-	passedData === ''
-		? (e.currentTarget.style.border = '2px solid #bdbdbd') //когда в инпуте пустая строка, возвращает инпуту цвет по умолчанию
+	isInputEmpty
+		? (e.currentTarget.style.border = '2px solid #bdbdbd')
 		: isDataValid
 		? addClass('valid')
 		: addClass('invalid');
