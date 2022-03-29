@@ -1,15 +1,18 @@
-const inputValidationElem = document.querySelector('#validation-input');
+const refs = {
+	inputValidationElem: document.querySelector('#validation-input'),
+};
 
-inputValidationElem.addEventListener('blur', checkEnteredData);
+refs.inputValidationElem.addEventListener('blur', checkEnteredData);
 
 function checkEnteredData(e) {
-	const {
-		value: { length: enteredValue },
-		dataset: { length: requeredValue },
-	} = e.currentTarget;
-	const isDataValid = enteredValue == requeredValue;
+	const { value: passedData, dataset: requeredData } = e.currentTarget;
+	const isDataValid = Number(passedData.length) === Number(requeredData.length);
 
-	isDataValid ? addClass('valid') : addClass('invalid');
+	passedData === ''
+		? (e.currentTarget.style.border = '2px solid #bdbdbd') //когда в инпуте пустая строка, возвращает инпуту цвет по умолчанию
+		: isDataValid
+		? addClass('valid')
+		: addClass('invalid');
 }
 
 function addClass(className) {
