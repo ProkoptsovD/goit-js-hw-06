@@ -4,12 +4,15 @@ const onFormSubmit = (event) => {
 	event.preventDefault();
 
 	const {
-		elements: { email: email, password: password },
+		elements: {
+			email: { value: email },
+			password: { value: password },
+		},
 	} = event.currentTarget;
 
-	!email.value || !password.value
+	!email || !password
 		? alert('Пожалуйста, заполните ВСЕ поля')
-		: console.log(`Email: ${email.value}`, `Password: ${password.value}`);
+		: console.log({ email: password });
 
 	loginFormRef.reset();
 };
