@@ -1,45 +1,30 @@
-const categories = document.querySelectorAll('.item');
+const refs = {
+	categories: document.querySelectorAll('.item'),
+};
 
-//находит категории
-const getCategory = function () {
-	const categoryList = [];
+logInfo(refs.categories);
 
-	categories.forEach((category) => {
-		categoryList.push(category.firstElementChild);
+function logInfo(arr) {
+	const categoriesInfo = getCategoryInfo(arr);
+	const categoriesQuantaty = Object.entries(categoriesInfo);
+
+	console.log(`Number of categories: ${categoriesQuantaty.length}`);
+
+	categoriesQuantaty.map((category) => {
+		console.log(`Category: ${category[0]}`);
+		console.log(`Elements: ${category[1]}`);
+	});
+}
+
+function getCategoryInfo(arr) {
+	const categoryNames = {};
+
+	arr.forEach((category) => {
+		const name = category.firstElementChild.textContent;
+		const numberOfElements = category.children[1].children.length;
+
+		categoryNames[name] = numberOfElements;
 	});
 
-	return categoryList;
-};
-
-//считает количество категорий
-const getNumberOfCategories = () =>
-	console.log(`Number of categories: ${getCategory().length}`);
-
-//находит назнания категорий
-const getCategoryNames = function () {
-	return getCategory().map(
-		(categoryName) => `Category: ${categoryName.textContent}`
-	);
-};
-
-// считает количество элементов в каждой категории
-const getNumberOfElemsInCategory = () =>
-	getCategory().map(
-		(category) => `Elements: ${category.nextElementSibling.children.length}`
-	);
-
-//логирует результаты
-const logResults = function () {
-	const categoryNames = getCategoryNames();
-	const amountOfElemsInCategory = getNumberOfElemsInCategory();
-	const arr = [];
-
-	for (let i = 0; i < categoryNames.length; i += 1) {
-		arr.push(categoryNames[i], amountOfElemsInCategory[i]);
-	}
-
-	console.log(arr.join`\n`);
-};
-
-getNumberOfCategories();
-logResults();
+	return categoryNames;
+}
