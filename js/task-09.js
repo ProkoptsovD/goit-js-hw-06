@@ -1,16 +1,20 @@
-const changeColorBtnRef = document.querySelector('.change-color');
+const refs = {
+	changeColorBtnRef: document.querySelector('.change-color'),
+	body: document.querySelector('body'),
+	hexColorCode: document.querySelector('.color'),
+};
 
-changeColorBtnRef.addEventListener('click', onBtnClickChangeColor);
-
-function getRandomHexColor() {
-	return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
+refs.changeColorBtnRef.addEventListener('click', onBtnClickChangeColor);
 
 function onBtnClickChangeColor() {
-	const bodyRef = document.querySelector('body');
-	const hexColorCode = document.querySelector('.color');
 	const generatedColor = getRandomHexColor();
 
-	bodyRef.style.backgroundColor = generatedColor;
-	hexColorCode.textContent = generatedColor;
+	refs.body.style.backgroundColor = generatedColor;
+	refs.hexColorCode.textContent = generatedColor;
+}
+
+function getRandomHexColor() {
+	return `#${Math.floor(Math.random() * 16777215)
+		.toString(16)
+		.padStart(6, '0')}`;
 }
